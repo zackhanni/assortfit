@@ -30,12 +30,7 @@ const BookOverview = ({
           </p>
 
           <div className="flex flex-row gap-1">
-            <Image
-              src={"/public/icons/star.svg"}
-              alt="star"
-              width={22}
-              height={22}
-            />
+            <Image src={"/icons/star.svg"} alt="star" width={22} height={22} />
             <p>{rating}</p>
           </div>
         </div>
@@ -60,12 +55,7 @@ const BookOverview = ({
         </p>
 
         <Button>
-          <Image
-            src={"/public/icons/book.svg"}
-            alt="book"
-            height={20}
-            width={20}
-          />
+          <Image src={"/icons/book.svg"} alt="book" height={20} width={20} />
           <p className="font-bebas-neue text-xl text-dark-100">Borrow</p>
         </Button>
       </div>
