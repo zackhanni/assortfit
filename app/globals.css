@@ -89,8 +89,8 @@
   --font-bebas-neue: var(--bebas-neue);
 
   /* colors */
-  --primary: #e7c9a5;
-  --primary-admin: #25388c;
+  --color-primary: #e7c9a5;
+  --color-primary-admin: #25388c;
 
   --color-green-100: #ecfdf3;
   --color-green-400: #4c7b62;
