@@ -10,7 +10,7 @@ Shad.cn
 
 https://www.youtube.com/watch?v=EZajJGOMWas&t=1506s
 
-- currently at 1hr 8 min
+- currently at 1hr36 min - image kit
 
 ## later app ideas
 
