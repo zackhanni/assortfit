@@ -5,12 +5,13 @@
 Next.js
 Tailwind
 Shad.cn
+imagekit - image optimization and storage
 
 ## video tutorial help
 
 https://www.youtube.com/watch?v=EZajJGOMWas&t=1506s
 
-- currently at 1hr36 min - image kit
+- currently at 1hr58 min - Neon Postgres
 
 ## later app ideas
 
