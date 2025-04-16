@@ -1,4 +1,5 @@
 import {
+  boolean,
   date,
   integer,
   pgEnum,
@@ -30,6 +31,7 @@ export const users = pgTable("users", {
   universityCard: text("university_card").notNull(), // remove after demo
   status: MEMBERSHIP_STATUS_ENUM("status").default("None"),
   role: ROLE_ENUM("role").default("USER"),
+  profileIsPublic: boolean("profile_is_public").default(false),
   lastActivityDate: date("last_activity_date").defaultNow(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
 });
