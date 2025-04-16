@@ -1,11 +1,15 @@
 "use client";
 
 import config from "@/lib/config";
-import ImageKit from "imagekit";
 import { IKImage, ImageKitProvider, IKUpload } from "imagekitio-next";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
+
+type ImageUploadResponse = {
+  filePath: string;
+  // Add other properties you expect from the response
+};
 
 const {
   env: {
@@ -25,8 +29,11 @@ const authenticator = async () => {
     const data = await response.json();
     const { signature, expire, token } = data;
     return { token, expire, signature };
-  } catch (error: any) {
-    throw new Error(`Authentication request failed: ${error.message}`);
+  } catch (error) {
+    if (error instanceof Error && "message" in error) {
+      throw new Error(`Authentication request failed: ${error.message}`);
+    }
+    throw new Error("Authentication request failed");
   }
 };
 
@@ -38,13 +45,13 @@ const ImageUpload = ({
   const ikUploadRef = useRef(null);
   const [file, setFile] = useState<{ filePath: string } | null>(null);
 
-  const onError = (error: any) => {
+  const onError = (error: string | { message: string }) => {
     console.log(error);
     toast(
       "Image upload failed. Your image could not be uploaded. Please try again."
     );
   };
-  const onSuccess = (res: any) => {
+  const onSuccess = (res: ImageUploadResponse) => {
     setFile(res);
     onFileChange(res.filePath);
     toast(`${res.filePath} uploaded successfully!`);
@@ -70,7 +77,7 @@ const ImageUpload = ({
           e.preventDefault();
 
           if (ikUploadRef.current) {
-            // @ts-ignore
+            //@ts-expect-error // adding description to stop error
             ikUploadRef.current?.click();
           }
         }}
