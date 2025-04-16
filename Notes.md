@@ -10,7 +10,12 @@ Neon - serverless postgreSQL database
 Drizzle Headless TypeScript ORM (object relational mapping) - make it simple to specify architecture of complex databases in simple js code
 Auth.js
 bcrypt - encrypting passwords
-Upstash - rate limit( prevent DDOS), serverles Redis DB, cash data, make efficient searches
+Upstash
+
+- Redis - rate limit (prevent DDOS)
+- Qstash - send emails to new users and send periodic emails.
+-
+- cash data, make efficient searches
 
 ## video tutorial help
 
