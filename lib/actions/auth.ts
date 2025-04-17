@@ -68,6 +68,7 @@ export const signUp = async (params: AuthCredentials) => {
       universityCard,
     });
 
+    // trigger upstash email workflow
     await workflowClient.trigger({
       url: `${config.env.prodApiEndpoint}/api/workflows/onboarding`,
       body: {
