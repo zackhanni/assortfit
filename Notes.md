@@ -16,12 +16,13 @@ Upstash
 - Qstash - send emails to new users and send periodic emails.
 -
 - cash data, make efficient searches
+- Next after - allows you to shedule work to be executed after a response is finished
 
 ## video tutorial help
 
 https://www.youtube.com/watch?v=EZajJGOMWas&t=1506s
 
-- currently at 3hr6 min - User onboarding flow
+- currently at 3hr57 min - Admin Platform
 
 ## later app ideas
 
@@ -35,3 +36,7 @@ https://orm.drizzle.team/docs/tutorials/drizzle-with-neon#applying-changes-to-th
 - You can generate migrations using 'npx drizzle-kit generate' command and then run them using the 'npx drizzle-kit migrate' command.
 - Alternatively, you can push changes directly to the database using Drizzle kit push command: npx drizzle-kit push
 - Run drizzle server - npm run db:studio
+
+## ISSUES
+
+- upstash workshow isnt going to the next step. sending into email works, but it wont wait for the next step (waiting 3 days for follow up email) (in video before 3hrs 57min ) - Error [QstashError]: {"error":"unable to authenticate: invalid token"}
