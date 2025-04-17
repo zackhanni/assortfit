@@ -70,7 +70,7 @@ export const { POST } = serve<InitialData>(async (context) => {
         await sendEmail({
           email,
           subject: "Welcome back",
-          message: `Welcome back${fullName}! Its good to see you active.`,
+          message: `Welcome back ${fullName}! It's good to see you active`,
         });
       });
     }
