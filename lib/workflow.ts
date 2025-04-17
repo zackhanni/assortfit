@@ -20,21 +20,16 @@ export const sendEmail = async ({
   subject: string;
   message: string;
 }) => {
-  try {
-    await qstashClient.publishJSON({
-      api: {
-        name: "email",
-        provider: resend({ token: config.env.resendToken }),
-      },
-      body: {
-        from: "AssortFit <noreply@hello.webwizarddev.com>",
-        to: [email],
-        subject,
-        html: message,
-      },
-    });
-  } catch (error) {
-    console.error("Error sending email:", error);
-    // Handle the error appropriately (e.g., retry, fallback method)
-  }
+  await qstashClient.publishJSON({
+    api: {
+      name: "email",
+      provider: resend({ token: config.env.resendToken }),
+    },
+    body: {
+      from: "AssortFit <noreply@hello.webwizarddev.com>",
+      to: [email],
+      subject,
+      html: message,
+    },
+  });
 };
