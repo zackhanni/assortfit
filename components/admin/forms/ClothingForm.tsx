@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import { clothingSchema } from "@/lib/validations";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import FileUpload from "@/components/FileUpload";
 
 interface Props extends Partial<Clothing> {
   type?: "create" | "update";
@@ -170,7 +171,17 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
               <FormLabel className="text-base font-normal text-dark-500">
                 Book Image
               </FormLabel>
-              <FormControl>{/* File upload component */}</FormControl>
+              <FormControl>
+                <FileUpload
+                  type="image"
+                  accept="image/*"
+                  placeholder="Upload a book cover"
+                  folder="clothes" // change to specific clothing sub-type
+                  variant="light"
+                  onFileChange={field.onChange}
+                  value={field.value}
+                />
+              </FormControl>
 
               <FormMessage />
             </FormItem>
@@ -221,7 +232,17 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
               <FormLabel className="text-base font-normal text-dark-500">
                 Book Trailer
               </FormLabel>
-              <FormControl>{/* File upload component */}</FormControl>
+              <FormControl>
+                <FileUpload
+                  type="video"
+                  accept="video/*"
+                  placeholder="Upload a book trailer"
+                  folder="clothes/videos" // change to specific clothing sub-type
+                  variant="light"
+                  onFileChange={field.onChange}
+                  value={field.value}
+                />
+              </FormControl>
 
               <FormMessage />
             </FormItem>
