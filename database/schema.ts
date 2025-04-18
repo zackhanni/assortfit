@@ -37,25 +37,25 @@ export const users = pgTable("users", {
 });
 
 export const COLOR_ENUM = pgEnum("color", [
-  "RED",
-  "PINK",
-  "ORANGE",
-  "YELLOW",
-  "GREEN",
-  "BLUE",
-  "PURPLE",
-  "BROWN",
-  "BLACK",
-  "GREY",
-  "WHITE",
-  "BEIGE",
+  "red",
+  "pink",
+  "orange",
+  "yellow",
+  "green",
+  "blue",
+  "purple",
+  "brown",
+  "black",
+  "grey",
+  "white",
+  "beige",
 ]);
 
 export const SEASON_ENUM = pgEnum("season", [
-  "SUMMER",
-  "FALL",
-  "WINTER",
-  "SPRING",
+  "summer",
+  "fall",
+  "winter",
+  "spring",
 ]);
 
 export const CATEGORY_ENUM = pgEnum("category", [
@@ -93,13 +93,12 @@ export const clothing = pgTable("clothing", {
   category: CATEGORY_ENUM("category"),
   lifecycle: LIFECYCLE_ENUM("lifecycle"),
 
-  // I want to make these dedicated tables in the future
+  // I may want to make these dedicated tables in the future
   colors: COLOR_ENUM("color").array(),
   seasons: SEASON_ENUM("season").array(),
-  occasion: OCCASION_ENUM("occasion").array(),
-
+  occasions: OCCASION_ENUM("occasion").array(),
+  notes: text("notes").notNull(),
   imageUrl: text("image_url"),
-  lastActivityDate: date("last_activity_date").defaultNow(),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
 });
 

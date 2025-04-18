@@ -7,6 +7,7 @@ import { z } from "zod";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,6 +20,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import FileUpload from "@/components/FileUpload";
 import ColorPicker from "../ColorPicker";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface Props extends Partial<Clothing> {
   type?: "create" | "update";
@@ -30,16 +39,14 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
   const form = useForm<z.infer<typeof clothingSchema>>({
     resolver: zodResolver(clothingSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      author: "",
-      genre: "",
-      rating: 1,
-      totalCopies: 1,
-      coverUrl: "",
-      coverColor: "",
-      videoUrl: "",
-      summary: "",
+      brand: "",
+      category: "top",
+      lifecycle: "new",
+      colors: [],
+      seasons: [],
+      occasions: [],
+      notes: "",
+      imageUrl: "",
     },
   });
 
@@ -48,21 +55,40 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
     // do  something
   };
 
+  const colorsArray = [
+    "red",
+    "pink",
+    "orange",
+    "yellow",
+    "green",
+    "blue",
+    "purple",
+    "brown",
+    "black",
+    "grey",
+    "white",
+    "beige",
+  ];
+
+  const seasonsArray = ["summer", "fall", "winter", "spring"];
+
+  const occasionsArray = ["casual", "work", "formal", "workout", "lounge_wear"];
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name={"title"}
+          name={"brand"}
           render={({ field }) => (
             <FormItem className="flex flex-col gap-1">
               <FormLabel className="text-base font-normal text-dark-500">
-                Book Title
+                Brand
               </FormLabel>
               <FormControl>
                 <Input
                   required
-                  placeholder="Book title"
+                  placeholder="Clothing brand"
                   {...field}
                   className="min-h-14 border border-gray-100 bg-light-600 p-4 text-base font-semibold placeholder:font-normal placeholder:text-slate-500"
                 />
@@ -75,19 +101,33 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
 
         <FormField
           control={form.control}
-          name={"author"}
+          name={"category"}
           render={({ field }) => (
             <FormItem className="flex flex-col gap-1">
               <FormLabel className="text-base font-normal text-dark-500">
-                Author
+                Category
               </FormLabel>
               <FormControl>
-                <Input
+                <Select required {...field}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Top" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="top">Top</SelectItem>
+                    <SelectItem value="bottom">Bottom</SelectItem>
+                    <SelectItem value="jacket">Jacket</SelectItem>
+                    <SelectItem value="hat">Hat</SelectItem>
+                    <SelectItem value="shoes">Shoes</SelectItem>
+                    <SelectItem value="socks">Socks</SelectItem>
+                    <SelectItem value="accessory">Accessory</SelectItem>
+                  </SelectContent>
+                </Select>
+                {/* <Input
                   required
-                  placeholder="Book Author"
+                  placeholder=""
                   {...field}
                   className="min-h-14 border border-gray-100 bg-light-600 p-4 text-base font-semibold placeholder:font-normal placeholder:text-slate-500"
-                />
+                /> */}
               </FormControl>
 
               <FormMessage />
@@ -97,21 +137,26 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
 
         <FormField
           control={form.control}
-          name={"genre"}
+          name={"lifecycle"}
           render={({ field }) => (
             <FormItem className="flex flex-col gap-1">
               <FormLabel className="text-base font-normal text-dark-500">
-                Genre
+                Lifecycle
               </FormLabel>
               <FormControl>
-                <Input
-                  required
-                  placeholder="Book genre"
-                  {...field}
-                  className="min-h-14 border border-gray-100 bg-light-600 p-4 text-base font-semibold placeholder:font-normal placeholder:text-slate-500"
-                />
+                <Select required {...field}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="New" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="new">New</SelectItem>
+                    <SelectItem value="in_use">In use</SelectItem>
+                    <SelectItem value="old">Old</SelectItem>
+                    <SelectItem value="replace">Replace</SelectItem>
+                    <SelectItem value="retired">Retired</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
@@ -119,23 +164,49 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
 
         <FormField
           control={form.control}
-          name={"rating"}
-          render={({ field }) => (
-            <FormItem className="flex flex-col gap-1">
-              <FormLabel className="text-base font-normal text-dark-500">
-                Rating
-              </FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  min={1}
-                  max={5}
-                  placeholder="Book rating"
-                  {...field}
-                  className="min-h-14 border border-gray-100 bg-light-600 p-4 text-base font-semibold placeholder:font-normal placeholder:text-slate-500"
+          name={"colors"}
+          render={() => (
+            <FormItem>
+              <div className="mb-4">
+                <FormLabel className="text-base">Colors</FormLabel>
+                <FormDescription>
+                  Select the colors you want to be associated with this
+                  clothing.
+                </FormDescription>
+              </div>
+              {colorsArray.map((color) => (
+                <FormField
+                  key={color}
+                  control={form.control}
+                  name="colors"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={color}
+                        className="flex flex-row items-start space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(color)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, color])
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== color
+                                    )
+                                  );
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="font-normal lowercase ">
+                          {color}
+                        </FormLabel>
+                      </FormItem>
+                    );
+                  }}
                 />
-              </FormControl>
-
+              ))}
               <FormMessage />
             </FormItem>
           )}
@@ -143,23 +214,48 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
 
         <FormField
           control={form.control}
-          name={"totalCopies"}
-          render={({ field }) => (
-            <FormItem className="flex flex-col gap-1">
-              <FormLabel className="text-base font-normal text-dark-500">
-                Total Copies
-              </FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  min={1}
-                  max={10000}
-                  placeholder="Total copies"
-                  {...field}
-                  className="min-h-14 border border-gray-100 bg-light-600 p-4 text-base font-semibold placeholder:font-normal placeholder:text-slate-500"
+          name={"colors"}
+          render={() => (
+            <FormItem>
+              <div className="mb-4">
+                <FormLabel className="text-base">Seasons</FormLabel>
+                <FormDescription>
+                  Select which season this clothing should be worn.
+                </FormDescription>
+              </div>
+              {seasonsArray.map((season) => (
+                <FormField
+                  key={season}
+                  control={form.control}
+                  name="seasons"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={season}
+                        className="flex flex-row items-start space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(season)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, season])
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== season
+                                    )
+                                  );
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="font-normal lowercase ">
+                          {season}
+                        </FormLabel>
+                      </FormItem>
+                    );
+                  }}
                 />
-              </FormControl>
-
+              ))}
               <FormMessage />
             </FormItem>
           )}
@@ -167,18 +263,67 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
 
         <FormField
           control={form.control}
-          name={"coverUrl"}
+          name={"occasions"}
+          render={() => (
+            <FormItem>
+              <div className="mb-4">
+                <FormLabel className="text-base">Occasion</FormLabel>
+                <FormDescription>
+                  Select for which occasion this clothing should be worn.
+                </FormDescription>
+              </div>
+              {occasionsArray.map((occasion) => (
+                <FormField
+                  key={occasion}
+                  control={form.control}
+                  name="occasions"
+                  render={({ field }) => {
+                    return (
+                      <FormItem
+                        key={occasion}
+                        className="flex flex-row items-start space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(occasion)}
+                            onCheckedChange={(checked) => {
+                              return checked
+                                ? field.onChange([...field.value, occasion])
+                                : field.onChange(
+                                    field.value?.filter(
+                                      (value) => value !== occasion
+                                    )
+                                  );
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="font-normal lowercase ">
+                          {occasion}
+                        </FormLabel>
+                      </FormItem>
+                    );
+                  }}
+                />
+              ))}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name={"imageUrl"}
           render={({ field }) => (
             <FormItem className="flex flex-col gap-1">
               <FormLabel className="text-base font-normal text-dark-500">
-                Book Image
+                Clothing Image
               </FormLabel>
               <FormControl>
                 <FileUpload
                   type="image"
                   accept="image/*"
-                  placeholder="Upload a book cover"
-                  folder="clothes" // change to specific clothing sub-type
+                  placeholder="Upload a clear image of the clothing"
+                  folder={`clothes/${form.getValues().category}`}
                   variant="light"
                   onFileChange={field.onChange}
                   value={field.value}
@@ -190,7 +335,7 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
           )}
         />
 
-        <FormField
+        {/* <FormField
           control={form.control}
           name={"coverColor"}
           render={({ field }) => (
@@ -208,31 +353,30 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
 
         <FormField
           control={form.control}
-          name={"description"}
+          name={"notes"}
           render={({ field }) => (
             <FormItem className="flex flex-col gap-1">
               <FormLabel className="text-base font-normal text-dark-500">
-                Book Description
+                Notes
               </FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Book Description"
+                  placeholder="Notes about the clothing"
                   {...field}
                   rows={10}
                   className="min-h-14 border border-gray-100 bg-light-600 p-4 text-base font-semibold placeholder:font-normal placeholder:text-slate-500"
                 />
               </FormControl>
-
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <FormField
+        {/* <FormField
           control={form.control}
           name={"videoUrl"}
           render={({ field }) => (
@@ -255,29 +399,7 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
               <FormMessage />
             </FormItem>
           )}
-        />
-
-        <FormField
-          control={form.control}
-          name={"summary"}
-          render={({ field }) => (
-            <FormItem className="flex flex-col gap-1">
-              <FormLabel className="text-base font-normal text-dark-500">
-                Book Summary
-              </FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder="Book Summary"
-                  {...field}
-                  rows={5}
-                  className="min-h-14 border border-gray-100 bg-light-600 p-4 text-base font-semibold placeholder:font-normal placeholder:text-slate-500"
-                />
-              </FormControl>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        /> */}
 
         <Button
           type="submit"

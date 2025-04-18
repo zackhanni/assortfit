@@ -13,8 +13,7 @@ export const signInSchema = z.object({
   password: z.string().min(8),
 });
 
-// Change later
-export const clothingSchema = z.object({
+export const bookSchema = z.object({
   title: z.string().trim().min(2).max(100),
   description: z.string().trim().min(10).max(1000),
   author: z.string().trim().min(2).max(100),
@@ -28,4 +27,40 @@ export const clothingSchema = z.object({
     .regex(/^#[0-9A-F]{6}$/i),
   videoUrl: z.string().nonempty(),
   summary: z.string().trim().min(10),
+});
+
+export const clothingSchema = z.object({
+  brand: z.string().trim().min(1).max(255),
+  category: z.enum([
+    "top",
+    "bottom",
+    "jacket",
+    "hat",
+    "shoes",
+    "socks",
+    "accessory",
+  ]),
+  lifecycle: z.enum(["new", "in_use", "old", "replace", "retired"]),
+  colors: z.array(
+    z.enum([
+      "red",
+      "pink",
+      "orange",
+      "yellow",
+      "green",
+      "blue",
+      "purple",
+      "brown",
+      "black",
+      "grey",
+      "white",
+      "beige",
+    ])
+  ),
+  seasons: z.array(z.enum(["summer", "fall", "winter", "spring"])),
+  occasions: z.array(
+    z.enum(["casual", "work", "formal", "workout", "lounge_wear"])
+  ),
+  notes: z.string(),
+  imageUrl: z.string().nonempty(),
 });

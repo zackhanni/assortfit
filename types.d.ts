@@ -1,3 +1,5 @@
+import { string } from "zod";
+
 interface Book {
   id: number;
   title: string;
@@ -36,4 +38,28 @@ interface AuthCredentials {
   password: string;
   universityId: number;
   universityCard: string;
+}
+
+interface BookParams {
+  title: string;
+  author: string;
+  genre: string;
+  rating: number;
+  coverUrl: string;
+  coverColor: string;
+  description: string;
+  totalCopies: number;
+  videoUrl: string;
+  summary: string;
+}
+
+interface ClothingParams {
+  brand: string;
+  category: string; // pants, shirt
+  lifecycle: string; // new, vintage
+  colors: string[];
+  seasons: string[];
+  occasions: string[]; // formal, casual, work,
+  imageUrl: string;
+  notes: string;
 }
