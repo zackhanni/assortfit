@@ -25,8 +25,8 @@ export const adminSideBarLinks = [
   },
   {
     img: "/icons/admin/book.svg",
-    route: "/admin/books",
-    text: "All Books",
+    route: "/admin/clothes",
+    text: "All Clothes",
   },
   {
     img: "/icons/admin/bookmark.svg",
