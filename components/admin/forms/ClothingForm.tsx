@@ -18,6 +18,7 @@ import { clothingSchema } from "@/lib/validations";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import FileUpload from "@/components/FileUpload";
+import ColorPicker from "../ColorPicker";
 
 interface Props extends Partial<Clothing> {
   type?: "create" | "update";
@@ -43,6 +44,7 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
   });
 
   const onSubmit = async (values: z.infer<typeof clothingSchema>) => {
+    console.log(values);
     // do  something
   };
 
@@ -196,7 +198,12 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
               <FormLabel className="text-base font-normal text-dark-500">
                 Primary Color
               </FormLabel>
-              <FormControl>{/* Color Picker */}</FormControl>
+              <FormControl>
+                <ColorPicker
+                  onPickerChange={field.onChange}
+                  value={field.value}
+                />
+              </FormControl>
 
               <FormMessage />
             </FormItem>
@@ -214,6 +221,7 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
               <FormControl>
                 <Textarea
                   placeholder="Book Description"
+                  {...field}
                   rows={10}
                   className="min-h-14 border border-gray-100 bg-light-600 p-4 text-base font-semibold placeholder:font-normal placeholder:text-slate-500"
                 />
