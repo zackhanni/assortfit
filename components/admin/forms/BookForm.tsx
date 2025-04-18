@@ -14,21 +14,23 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
-import { clothingSchema } from "@/lib/validations";
+import { bookSchema } from "@/lib/validations";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import FileUpload from "@/components/FileUpload";
 import ColorPicker from "../ColorPicker";
+import { createBook } from "@/lib/admin/actions/book";
+import { toast } from "sonner";
 
-interface Props extends Partial<Clothing> {
+interface Props extends Partial<Book> {
   type?: "create" | "update";
 }
 
-const BookForm = ({ type, ...clothing }: Props) => {
+const BookForm = ({ type, ...book }: Props) => {
   const router = useRouter();
 
-  const form = useForm<z.infer<typeof clothingSchema>>({
-    resolver: zodResolver(clothingSchema),
+  const form = useForm<z.infer<typeof bookSchema>>({
+    resolver: zodResolver(bookSchema),
     defaultValues: {
       title: "",
       description: "",
@@ -43,9 +45,17 @@ const BookForm = ({ type, ...clothing }: Props) => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof clothingSchema>) => {
+  const onSubmit = async (values: z.infer<typeof bookSchema>) => {
     console.log(values);
-    // do  something
+    const result = await createBook(values);
+
+    if (result.success) {
+      toast("Book created successfully!");
+
+      router.push(`/admin/books/${result.data.id}`);
+    } else {
+      toast(`Error - ${result.message}`);
+    }
   };
 
   return (

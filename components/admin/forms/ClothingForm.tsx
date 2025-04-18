@@ -19,7 +19,6 @@ import { clothingSchema } from "@/lib/validations";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import FileUpload from "@/components/FileUpload";
-import ColorPicker from "../ColorPicker";
 import {
   Select,
   SelectContent,
