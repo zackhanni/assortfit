@@ -91,21 +91,25 @@ export const clothing = pgTable("clothing", {
   id: uuid("id").notNull().primaryKey().defaultRandom().unique(),
   brand: varchar("brand", { length: 255 }).notNull().default("Unknown"),
   category: CATEGORY_ENUM("category"),
-  lifecycle: LIFECYCLE_ENUM("lifecycle"),
+  // lifecycle: LIFECYCLE_ENUM("lifecycle"),
 
   // I may want to make these dedicated tables in the future
   colors: COLOR_ENUM("color").array(),
-  seasons: SEASON_ENUM("season").array(),
-  occasions: OCCASION_ENUM("occasion").array(),
+  // seasons: SEASON_ENUM("season").array(),
+  // occasions: OCCASION_ENUM("occasion").array(),
   notes: text("notes").notNull(),
   imageUrl: text("image_url"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
 });
 
+//
+
 // Example clothing query
 // SELECT * FROM clothing WHERE 'RED' = ANY(colors);
 // or
 // SELECT * FROM clothing WHERE colors && ARRAY['RED', 'BLACK'];
+
+//
 
 // delete or edit below after finishing demo
 export const books = pgTable("books", {

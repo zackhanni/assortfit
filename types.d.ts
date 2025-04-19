@@ -56,10 +56,10 @@ interface BookParams {
 interface ClothingParams {
   brand: string;
   category: string; // pants, shirt
-  lifecycle: string; // new, vintage
+  // lifecycle: string; // new, vintage
   colors: string[];
-  seasons: string[];
-  occasions: string[]; // formal, casual, work,
+  // seasons: string[];
+  // occasions: string[]; // formal, casual, work,
   imageUrl: string;
   notes: string;
 }

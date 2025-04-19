@@ -40,7 +40,7 @@ export const clothingSchema = z.object({
     "socks",
     "accessory",
   ]),
-  lifecycle: z.enum(["new", "in_use", "old", "replace", "retired"]),
+  // lifecycle: z.enum(["new", "in_use", "old", "replace", "retired"]),
   colors: z.array(
     z.enum([
       "red",
@@ -57,10 +57,10 @@ export const clothingSchema = z.object({
       "beige",
     ])
   ),
-  seasons: z.array(z.enum(["summer", "fall", "winter", "spring"])),
-  occasions: z.array(
-    z.enum(["casual", "work", "formal", "workout", "lounge_wear"])
-  ),
+  // seasons: z.array(z.enum(["summer", "fall", "winter", "spring"])),
+  // occasions: z.array(
+  //   z.enum(["casual", "work", "formal", "workout", "lounge_wear"])
+  // ),
   notes: z.string(),
   imageUrl: z.string().nonempty(),
 });

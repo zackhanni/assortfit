@@ -42,10 +42,10 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
     defaultValues: {
       brand: "",
       category: "top",
-      lifecycle: "new",
+      // lifecycle: "new",
       colors: [],
-      seasons: [],
-      occasions: [],
+      // seasons: [],
+      // occasions: [],
       notes: "",
       imageUrl: "",
     },
@@ -78,11 +78,11 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
     "grey",
     "white",
     "beige",
-  ];
+  ] as const;
 
-  const seasonsArray = ["summer", "fall", "winter", "spring"];
+  // const seasonsArray = ["summer", "fall", "winter", "spring"];
 
-  const occasionsArray = ["casual", "work", "formal", "workout", "lounge_wear"];
+  // const occasionsArray = ["casual", "work", "formal", "workout", "lounge_wear"];
 
   return (
     <Form {...form}>
@@ -132,12 +132,6 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
                     <SelectItem value="accessory">Accessory</SelectItem>
                   </SelectContent>
                 </Select>
-                {/* <Input
-                  required
-                  placeholder=""
-                  {...field}
-                  className="min-h-14 border border-gray-100 bg-light-600 p-4 text-base font-semibold placeholder:font-normal placeholder:text-slate-500"
-                /> */}
               </FormControl>
 
               <FormMessage />
@@ -145,7 +139,7 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
           )}
         />
 
-        <FormField
+        {/* <FormField
           control={form.control}
           name={"lifecycle"}
           render={({ field }) => (
@@ -170,7 +164,7 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
 
         <FormField
           control={form.control}
@@ -222,9 +216,9 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
           )}
         />
 
-        <FormField
+        {/* <FormField
           control={form.control}
-          name={"colors"}
+          name={"seasons"}
           render={() => (
             <FormItem>
               <div className="mb-4">
@@ -269,9 +263,9 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
 
-        <FormField
+        {/* <FormField
           control={form.control}
           name={"occasions"}
           render={() => (
@@ -318,7 +312,7 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
 
         <FormField
           control={form.control}
