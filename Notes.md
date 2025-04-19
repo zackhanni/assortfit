@@ -17,12 +17,13 @@ Upstash
 -
 - cash data, make efficient searches
 - Next after - allows you to shedule work to be executed after a response is finished
+- react-colorful - for color picking - https://www.npmjs.com/package/react-colorful
 
 ## video tutorial help
 
 https://www.youtube.com/watch?v=EZajJGOMWas&t=1506s
 
-- currently at 3hr57 min - Admin Platform
+- currently at 5hr21 min - Seed db
 
 ## later app ideas
 
@@ -40,3 +41,9 @@ https://orm.drizzle.team/docs/tutorials/drizzle-with-neon#applying-changes-to-th
 ## ISSUES
 
 - upstash workshow isnt going to the next step. sending into email works, but it wont wait for the next step (waiting 3 days for follow up email) (in video before 3hrs 57min ) - Error [QstashError]: {"error":"unable to authenticate: invalid token"}
+- duplicate names files can be uploaded to imagekit.io. may cause issues later on
+
+## Seed dummydata to database
+
+- npm run seed
+- set up seed.ts file in db as a standalone file to seed demo data.
