@@ -29,7 +29,6 @@ const BookCover = ({
   coverColor = "#012B48",
   coverImage = "https://placehold.co/400x600.png",
 }: Props) => {
-  // console.log("book location:", config.env.imagekit.urlEndpoint, coverImage);
   return (
     <div
       className={cn(
@@ -39,12 +38,13 @@ const BookCover = ({
       )}
     >
       <BookCoverSvg coverColor={coverColor} />
+
       <div
         className="absolute z-10"
         style={{ left: "12%", width: "87.5%", height: "88%" }}
       >
         <IKImage
-          src={coverImage}
+          path={coverImage}
           urlEndpoint={config.env.imagekit.urlEndpoint}
           alt="Book cover"
           fill
@@ -56,5 +56,4 @@ const BookCover = ({
     </div>
   );
 };
-
 export default BookCover;
