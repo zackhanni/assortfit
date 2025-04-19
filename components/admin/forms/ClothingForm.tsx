@@ -27,6 +27,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { createClothing } from "@/lib/admin/actions/clothing";
+import { toast } from "sonner";
 
 interface Props extends Partial<Clothing> {
   type?: "create" | "update";
@@ -51,7 +53,16 @@ const ClothingForm = ({ type, ...clothing }: Props) => {
 
   const onSubmit = async (values: z.infer<typeof clothingSchema>) => {
     console.log(values);
-    // do  something
+
+    const result = await createClothing(values);
+
+    if (result.success) {
+      toast("Book created successfully!");
+
+      router.push(`/admin/books/${result.data.id}`);
+    } else {
+      toast(`Error - ${result.message}`);
+    }
   };
 
   const colorsArray = [
