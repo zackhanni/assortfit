@@ -188,7 +188,7 @@ const BookForm = ({ type, ...book }: Props) => {
                   type="image"
                   accept="image/*"
                   placeholder="Upload a book cover"
-                  folder="clothes" // change to specific clothing sub-type
+                  folder="books/covers"
                   variant="light"
                   onFileChange={field.onChange}
                   value={field.value}
@@ -255,7 +255,7 @@ const BookForm = ({ type, ...book }: Props) => {
                   type="video"
                   accept="video/*"
                   placeholder="Upload a book trailer"
-                  folder="clothes/videos" // change to specific clothing sub-type
+                  folder="books/videos" // change to specific clothing sub-type
                   variant="light"
                   onFileChange={field.onChange}
                   value={field.value}
